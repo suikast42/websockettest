@@ -1,4 +1,4 @@
-package com.siemag.test.websockets.client;
+package com.siemag.test.websockets.client.atmosphere;
 
 import org.apache.log4j.BasicConfigurator;
 

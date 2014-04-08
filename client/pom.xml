@@ -37,6 +37,16 @@
             <artifactId>sysout-over-slf4j</artifactId>
             <version>1.0.2</version>
         </dependency>
+        <dependency>
+            <groupId>org.glassfish.tyrus</groupId>
+            <artifactId>tyrus-client</artifactId>
+            <version>1.5</version>
+        </dependency>
+        <dependency>
+            <groupId>org.glassfish.tyrus</groupId>
+            <artifactId>tyrus-container-grizzly-client</artifactId>
+            <version>1.5</version>
+        </dependency>
 
     </dependencies>
 
