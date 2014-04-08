@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+<h:head>
+    <title><ui:insert name="title"> #{controllerWmsManagement.title}  </ui:insert></title>
+
+    <h:outputStylesheet library="css" name="sms.css"/>
+    <!-- Show dialogs again if validation failed -->
+    <script type="text/javascript">
+        function handleComplete(widgetwar, xhr, status, args) {
+            if (args.validationFailed) {
+                widgetwar.hide();
+                widgetwar.show();
+            }
+            else {
+                widgetwar.hide();
+            }
+        }
+    </script>
+
+</h:head>
+
+<h:body>
+    <ui:insert name="body">Body</ui:insert>
+</h:body>
+</html>

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<PROCESS model-entity="JSFProcess">
+ <PROCESS-ITEM NAME="rules:#view#wms#home.xhtml"
+  PATH="/view/wms/home.xhtml" SHAPE="528,64,50,25"
+  model-entity="JSFProcessGroup" persistent="true"/>
+ <PROCESS-ITEM NAME="rules:#view#wms#wmsservices.xhtml"
+  PATH="/view/wms/wmsservices.xhtml" SHAPE="536,184,50,25"
+  model-entity="JSFProcessGroup" persistent="true"/>
+ <PROCESS-ITEM NAME="rules:#view#wms#timerservices.xhtml"
+  PATH="/view/wms/timerservices.xhtml" SHAPE="528,312,50,25"
+  model-entity="JSFProcessGroup" persistent="true"/>
+ <PROCESS-ITEM NAME="rules:#view#wms#monitoring.xhtml"
+  PATH="/view/wms/monitoring.xhtml" SHAPE="536,248,50,25"
+  model-entity="JSFProcessGroup" persistent="true"/>
+ <PROCESS-ITEM NAME="rules:wms#view#*" PATH="wms/view/*"
+  SHAPE="240,145,0,0" model-entity="JSFProcessGroup">
+  <PROCESS-ITEM ID="rules:wms#view#*:0" NAME="item" PATH="wms/view/*" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT ID="::#view#wms#home.xhtml" NAME="output"
+    PATH="/view/wms/home.xhtml" TARGET="rules:#view#wms#home.xhtml"
+    TITLE="[any]" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT ID="wmsservices::#view#wms#wmsservices.xhtml"
+    NAME="output1" PATH="/view/wms/wmsservices.xhtml"
+    TARGET="rules:#view#wms#wmsservices.xhtml" TITLE="wmsservices" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT ID="monitoring::#view#wms#monitoring.xhtml"
+    NAME="output2" PATH="/view/wms/monitoring.xhtml"
+    TARGET="rules:#view#wms#monitoring.xhtml" TITLE="monitoring" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT
+    ID="timerservices::#view#wms#timerservices.xhtml" NAME="output3"
+    PATH="/view/wms/timerservices.xhtml"
+    TARGET="rules:#view#wms#timerservices.xhtml" TITLE="timerservices" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+ </PROCESS-ITEM>
+</PROCESS>
