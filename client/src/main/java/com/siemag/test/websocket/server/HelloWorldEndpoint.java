@@ -1,4 +1,4 @@
-package com.siemag.websockets.server;
+package com.siemag.test.websocket.server;
 
 import org.apache.log4j.Logger;
 
@@ -15,12 +15,11 @@ import javax.websocket.server.ServerEndpoint;
 public class HelloWorldEndpoint {
 
     private Logger logger = Logger.getLogger(getClass());
+
     @OnMessage
     public String onMessage(String message,Session  session,@PathParam(value ="channelID" ) String channelID) {
         logger.info("Received : from "+channelID+" " + message );
-        for(Session _session:session.getOpenSessions()) {
-            _session.getAsyncRemote().sendObject("Server response " + message.concat(" ").concat("ECHO"));
-        }
+        session.getAsyncRemote().sendObject("Server response "+message) ;
         return message;
     }
     @OnOpen

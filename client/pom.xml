@@ -7,7 +7,9 @@
         <version>1.0.0-SNAPSHOT</version>
         <artifactId>websockettest</artifactId>
     </parent>
-
+     <properties>
+         <version.tyrus>1.6</version.tyrus>
+     </properties>
     <artifactId>client</artifactId>
     <packaging>jar</packaging>
 
@@ -15,37 +17,31 @@
 
 
     <dependencies>
-
         <dependency>
             <groupId>javax</groupId>
             <artifactId>javaee-api</artifactId>
             <version>7.0</version>
         </dependency>
-
-        <dependency>
-            <groupId>org.atmosphere</groupId>
-            <artifactId>wasync</artifactId>
-            <version>1.3.1</version>
-        </dependency>
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-simple</artifactId>
-            <version>1.7.6</version>
-        </dependency>
-        <dependency>
-            <groupId>uk.org.lidalia</groupId>
-            <artifactId>sysout-over-slf4j</artifactId>
-            <version>1.0.2</version>
-        </dependency>
         <dependency>
             <groupId>org.glassfish.tyrus</groupId>
             <artifactId>tyrus-client</artifactId>
-            <version>1.5</version>
+            <version>${version.tyrus}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.glassfish.tyrus</groupId>
+            <artifactId>tyrus-server</artifactId>
+            <version>${version.tyrus}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.glassfish.tyrus</groupId>
+            <artifactId>tyrus-container-grizzly-server</artifactId>
+            <version>${version.tyrus}</version>
         </dependency>
         <dependency>
             <groupId>org.glassfish.tyrus</groupId>
             <artifactId>tyrus-container-grizzly-client</artifactId>
-            <version>1.5</version>
+            <version>${version.tyrus}</version>
         </dependency>
 
     </dependencies>
