@@ -18,9 +18,19 @@ import java.net.URISyntaxException;
 @ClientEndpoint
 public class WebsocketClientGirzlyV2 {
 
+    private class SimpleReconnectionHandler extends ClientManager.ReconnectHandler {
+        @Override
+        public boolean onDisconnect(CloseReason closeReason) {
+            return true;
+        }
+
+        @Override
+        public boolean onConnectFailure(Exception exception) {
+            return true;
+        }
+    }
 
     private Logger logger = Logger.getLogger(getClass());
-
     private Session mySession;
     private final URI connectionURI;
 
@@ -34,7 +44,8 @@ public class WebsocketClientGirzlyV2 {
     }
 
     @OnOpen
-    public final void onOpen() {
+    public final void onOpen(Session session) {
+        mySession = session;
         logger.info("Connected ... " + mySession.getId());
         mySession.getAsyncRemote().sendText("start");
 //        mySession = session;
@@ -61,15 +72,20 @@ public class WebsocketClientGirzlyV2 {
     }
 
     private final WebsocketClientGirzlyV2 startConnection() {
-        if (mySession == null) {
-            WebSocketContainer c = ContainerProvider.getWebSocketContainer();
-            try {
-                mySession = c.connectToServer(this, connectionURI);
-            } catch (Exception e) {
-                throw new RuntimeException(e);
-            }
+        ClientManager client = ClientManager.createClient();
+        client.getProperties().put(ClientManager.RECONNECT_HANDLER, new SimpleReconnectionHandler());
+
+        try {
+            client.connectToServer(this, connectionURI);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
         }
         return this;
     }
 
 }
+
+
+
+
+
