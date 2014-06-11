@@ -53,7 +53,6 @@ public class WebsocketClientGirzlyV2 {
 
     @OnMessage
     public void onMessage(String message, Session session) {
-        logger.debug(mySession.equals(session) + " " + mySession.equals(session.getOpenSessions().iterator().next()));
         logger.info("Revceived on client side " + message);
     }
 
