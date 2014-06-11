@@ -4,6 +4,7 @@ import org.apache.log4j.BasicConfigurator;
 import org.apache.log4j.Logger;
 import org.glassfish.tyrus.server.Server;
 
+import javax.websocket.DeploymentException;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 
@@ -29,8 +30,26 @@ public class WebsocketServerTyrus {
         }
     }
 
+  public void runServerAnsRestartEvery(int onlineTimeInSeconds,int offlineTimeInSeconds) {
+        Server server = new Server("localhost", 8080, "/server", null, HelloWorldEndpoint.class);
+
+        int count =0;
+        while (true){
+            try {
+                logger.info("Loop "+(count++));
+                server.start();
+                Thread.sleep(onlineTimeInSeconds*1000);
+                server.stop();
+                Thread.sleep(offlineTimeInSeconds*1000);
+            } catch (Exception e) {
+               throw new RuntimeException(e);
+            }
+
+        }
+    }
+
     public static void main(String[] args) {
         BasicConfigurator.configure();
-        new WebsocketServerTyrus().runServer();
+        new WebsocketServerTyrus().runServerAnsRestartEvery(60,60);
     }
 }

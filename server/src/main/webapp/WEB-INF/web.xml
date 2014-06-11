@@ -63,38 +63,38 @@
     </context-param>
 
 
-    <!-- PrimeFaces Theme -->
-    <context-param>
-        <param-name>primefaces.THEME</param-name>
-        <param-value>bootstrap</param-value>
-    </context-param>
+    <!--&lt;!&ndash; PrimeFaces Theme &ndash;&gt;-->
+    <!--<context-param>-->
+        <!--<param-name>primefaces.THEME</param-name>-->
+        <!--<param-value>bootstrap</param-value>-->
+    <!--</context-param>-->
 
-    <servlet>
-        <servlet-name>Push Servlet</servlet-name>
-        <servlet-class>org.primefaces.push.PushServlet</servlet-class>
-        <init-param>
-            <param-name>org.atmosphere.useWebSocket</param-name>
-            <param-value>false</param-value>
-        </init-param>
-        <init-param>
-            <param-name>org.atmosphere.useNative</param-name>
-            <param-value>true</param-value>
-        </init-param>
-        <init-param>
-            <param-name>org.atmosphere.cpr.broadcasterCacheClass</param-name>
-            <param-value>org.atmosphere.cache.UUIDBroadcasterCache</param-value>
-        </init-param>
-        <load-on-startup>1</load-on-startup>
-        <async-supported>true</async-supported>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>Push Servlet</servlet-name>
-        <url-pattern>/primepush/*</url-pattern>
-    </servlet-mapping>
-    <context-param>
-        <param-name>primefaces.PUSH_SERVER_URL</param-name>
-        <param-value>http://127.0.0.1:8080</param-value>
-    </context-param>
+    <!--<servlet>-->
+        <!--<servlet-name>Push Servlet</servlet-name>-->
+        <!--<servlet-class>org.primefaces.push.PushServlet</servlet-class>-->
+        <!--<init-param>-->
+            <!--<param-name>org.atmosphere.useWebSocket</param-name>-->
+            <!--<param-value>false</param-value>-->
+        <!--</init-param>-->
+        <!--<init-param>-->
+            <!--<param-name>org.atmosphere.useNative</param-name>-->
+            <!--<param-value>true</param-value>-->
+        <!--</init-param>-->
+        <!--<init-param>-->
+            <!--<param-name>org.atmosphere.cpr.broadcasterCacheClass</param-name>-->
+            <!--<param-value>org.atmosphere.cache.UUIDBroadcasterCache</param-value>-->
+        <!--</init-param>-->
+        <!--<load-on-startup>1</load-on-startup>-->
+        <!--<async-supported>true</async-supported>-->
+    <!--</servlet>-->
+    <!--<servlet-mapping>-->
+        <!--<servlet-name>Push Servlet</servlet-name>-->
+        <!--<url-pattern>/primepush/*</url-pattern>-->
+    <!--</servlet-mapping>-->
+    <!--<context-param>-->
+        <!--<param-name>primefaces.PUSH_SERVER_URL</param-name>-->
+        <!--<param-value>http://127.0.0.1:8080</param-value>-->
+    <!--</context-param>-->
 
     <!-- Prime Push configuration. We need some additional settings for because Jboss not supports websockets -->
     <!--<servlet>-->
