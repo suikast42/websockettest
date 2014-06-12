@@ -1,7 +1,10 @@
 package com.siemag.test.websockets.client.tyrus;
 
 import org.apache.log4j.Logger;
+import org.glassfish.grizzly.threadpool.ThreadPoolConfig;
 import org.glassfish.tyrus.client.ClientManager;
+import org.glassfish.tyrus.container.grizzly.client.GrizzlyClientSocket;
+import org.glassfish.tyrus.core.Utils;
 
 import javax.websocket.*;
 import java.io.BufferedReader;
@@ -21,11 +24,17 @@ public class WebsocketClientGirzlyV2 {
     private class SimpleReconnectionHandler extends ClientManager.ReconnectHandler {
         @Override
         public boolean onDisconnect(CloseReason closeReason) {
+//            StackTraceElement[] stackTrace = Thread.currentThread().getStackTrace();
+//            StackTraceElement stackTraceElement = stackTrace[2];
+//            logger.error(stackTraceElement.getClassName()+"."+stackTraceElement.getMethodName()+":"+stackTraceElement.getLineNumber());
             return true;
         }
 
         @Override
         public boolean onConnectFailure(Exception exception) {
+//            StackTraceElement[] stackTrace = Thread.currentThread().getStackTrace();
+//            StackTraceElement stackTraceElement = stackTrace[2];
+//            logger.error(stackTraceElement.getClassName()+"."+stackTraceElement.getMethodName()+":"+stackTraceElement.getLineNumber() );
             return true;
         }
     }
@@ -73,7 +82,8 @@ public class WebsocketClientGirzlyV2 {
     private final WebsocketClientGirzlyV2 startConnection() {
         ClientManager client = ClientManager.createClient();
         client.getProperties().put(ClientManager.RECONNECT_HANDLER, new SimpleReconnectionHandler());
-
+//        client.getProperties().put(GrizzlyClientSocket.WORKER_THREAD_POOL_CONFIG, new SimpleReconnectionHandler());
+//        client.getProperties().put(GrizzlyClientSocket.SELECTOR_THREAD_POOL_CONFIG, new SimpleReconnectionHandler());
         try {
             client.connectToServer(this, connectionURI);
         } catch (Exception e) {
