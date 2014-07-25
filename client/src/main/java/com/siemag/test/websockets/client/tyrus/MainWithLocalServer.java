@@ -1,25 +1,22 @@
 package com.siemag.test.websockets.client.tyrus;
 
+import com.siemag.test.websocket.server.WebsocketServerTyrus;
 import org.apache.log4j.BasicConfigurator;
 import org.apache.log4j.Logger;
-import org.glassfish.tyrus.client.ClientManager;
 
-import javax.websocket.*;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.net.URI;
-import java.net.URISyntaxException;
 
 /**
  * @author: vuru
  * Date: 08.04.2014
  * Time: 15:03
  */
-public class MainV2 {
+public class MainWithLocalServer {
 
     //    http://www.programmingforliving.com/2013/08/jsr-356-java-api-for-websocket-client-api.html
-    private static Logger logger = Logger.getLogger(MainV2.class);
+    private static Logger logger = Logger.getLogger(MainWithLocalServer.class);
     private static String url1 = "ws://localhost:8080/server/hello/1";
     private static String url2 = "ws://localhost:8080/server/hello/2";
     private static String url3 = "ws://localhost:8080/server/hello/3";
@@ -27,23 +24,15 @@ public class MainV2 {
 
     public static void main(String[] args) throws IOException, InterruptedException {
         BasicConfigurator.configure();
-
-
-
-        int i = 0;
+        new WebsocketServerTyrus().runServerAnsRestartEveryAsThread(15,5);
 
         WebsocketClientGirzlyV2 socket1 = new WebsocketClientGirzlyV2(url1);
-        WebsocketClientGirzlyV2 socket2 = new WebsocketClientGirzlyV2(url2);
-        WebsocketClientGirzlyV2 socket3 = new WebsocketClientGirzlyV2(url3);
-        WebsocketClientGirzlyV2 socket4 = new WebsocketClientGirzlyV2(url4);
+        int i=0;
         while (true) {
             try {
-                String text = String.valueOf(i);
-                logger.info("Sending to sockets "+text);
-                socket1.send(text + " from client1");
-                socket2.send(text + " from client1");
-                socket3.send(text + " from client1");
-                socket4.send(text + " from client1");
+                String text =  String.valueOf(i) + " from client1";
+                logger.info("Sending to sockets " + text);
+                socket1.send(text);
             } catch (Exception e) {
                 logger.error("CAN'T SEND", e);
                 // IGNORE
@@ -55,12 +44,5 @@ public class MainV2 {
                 //
             }
         }
-//        while (true){
-//            try {
-//                Thread.sleep(100);
-//            } catch (InterruptedException e) {
-//                e.printStackTrace();
-//            }
-//        }
     }
 }

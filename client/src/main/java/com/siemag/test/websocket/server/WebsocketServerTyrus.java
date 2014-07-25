@@ -15,13 +15,14 @@ import java.io.InputStreamReader;
  */
 public class WebsocketServerTyrus {
     private Logger logger = Logger.getLogger(getClass());
+
     public void runServer() {
         Server server = new Server("localhost", 8080, "/server", null, HelloWorldEndpoint.class);
 
         try {
             server.start();
             BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-            logger.info ("Please press a key to stop the server.");
+            logger.info("Please press a key to stop the server.");
             reader.readLine();
         } catch (Exception e) {
             e.printStackTrace();
@@ -30,26 +31,31 @@ public class WebsocketServerTyrus {
         }
     }
 
-  public void runServerAnsRestartEvery(int onlineTimeInSeconds,int offlineTimeInSeconds) {
+    public void runServerAnsRestartEvery(int onlineTimeInSeconds, int offlineTimeInSeconds) {
+        logger.info("Online every " + onlineTimeInSeconds + " seconds  offline every " + offlineTimeInSeconds + " seconds");
         Server server = new Server("localhost", 8080, "/server", null, HelloWorldEndpoint.class);
 
-        int count =0;
-        while (true){
+        int count = 0;
+        while (true) {
             try {
-                logger.info("Loop "+(count++));
+                logger.info("Loop " + (count++));
                 server.start();
-                Thread.sleep(onlineTimeInSeconds*1000);
+                Thread.sleep(onlineTimeInSeconds * 1000);
                 server.stop();
-                Thread.sleep(offlineTimeInSeconds*1000);
+                Thread.sleep(offlineTimeInSeconds * 1000);
             } catch (Exception e) {
-               throw new RuntimeException(e);
+                throw new RuntimeException(e);
             }
 
         }
     }
 
+    public void runServerAnsRestartEveryAsThread(final int onlineTimeInSeconds, final int offlineTimeInSeconds) {
+        new Thread(() -> runServerAnsRestartEvery(onlineTimeInSeconds, offlineTimeInSeconds)).start();
+    }
+
     public static void main(String[] args) {
         BasicConfigurator.configure();
-        new WebsocketServerTyrus().runServerAnsRestartEvery(60,60);
+        new WebsocketServerTyrus().runServerAnsRestartEvery(60, 60);
     }
 }

@@ -15,11 +15,9 @@ import javax.websocket.server.ServerEndpoint;
 public class HelloWorldEndpoint {
 
     private Logger logger = Logger.getLogger(getClass());
-
     @OnMessage
     public String onMessage(String message,Session  session,@PathParam(value ="channelID" ) String channelID) {
-        logger.info("Received : from "+channelID+" " + message );
-        session.getAsyncRemote().sendObject("Server response "+message) ;
+        logger.info("Received : from " + channelID + " " + message);
         return message;
     }
     @OnOpen

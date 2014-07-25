@@ -18,9 +18,6 @@ public class HelloWorldEndpoint {
     @OnMessage
     public String onMessage(String message,Session  session,@PathParam(value ="channelID" ) String channelID) {
         logger.info("Received : from "+channelID+" " + message );
-        for(Session _session:session.getOpenSessions()) {
-            _session.getAsyncRemote().sendObject("Server response " + message.concat(" ").concat("ECHO"));
-        }
         return message;
     }
     @OnOpen
