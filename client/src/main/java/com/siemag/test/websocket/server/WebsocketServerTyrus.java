@@ -50,7 +50,7 @@ public class WebsocketServerTyrus {
         }
     }
 
-    public void runServerAnsRestartEveryAsThread(final int onlineTimeInSeconds, final int offlineTimeInSeconds) {
+    public void runServerAndRestartEvery(final int onlineTimeInSeconds, final int offlineTimeInSeconds) {
         new Thread(() -> runServerAnsRestartEvery(onlineTimeInSeconds, offlineTimeInSeconds)).start();
     }
 

@@ -4,9 +4,7 @@ import com.siemag.test.websocket.server.WebsocketServerTyrus;
 import org.apache.log4j.BasicConfigurator;
 import org.apache.log4j.Logger;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
 
 /**
  * @author: vuru
@@ -24,7 +22,7 @@ public class MainWithLocalServer {
 
     public static void main(String[] args) throws IOException, InterruptedException {
         BasicConfigurator.configure();
-        new WebsocketServerTyrus().runServerAnsRestartEveryAsThread(15,5);
+        new WebsocketServerTyrus().runServerAndRestartEvery(15,5);
 
         WebsocketClientGirzlyV2 socket1 = new WebsocketClientGirzlyV2(url1);
         int i=0;
@@ -39,7 +37,7 @@ public class MainWithLocalServer {
             }
             i++;
             try {
-                Thread.sleep(1000);
+                Thread.sleep(200);
             } catch (InterruptedException e) {
                 //
             }

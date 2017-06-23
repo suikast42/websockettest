@@ -3,6 +3,7 @@ package com.siemag.test.websockets.client.tyrus;
 import org.apache.log4j.Logger;
 import org.glassfish.grizzly.threadpool.ThreadPoolConfig;
 import org.glassfish.tyrus.client.ClientManager;
+import org.glassfish.tyrus.client.ClientProperties;
 import org.glassfish.tyrus.container.grizzly.client.GrizzlyClientSocket;
 import org.glassfish.tyrus.core.Utils;
 
@@ -12,6 +13,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * @author: vuru
@@ -21,14 +23,28 @@ import java.net.URISyntaxException;
 @ClientEndpoint
 public class WebsocketClientGirzlyV2 {
 
-    private class SimpleReconnectionHandler extends ClientManager.ReconnectHandler {
-        @Override
+    private static class SimpleReconnectionHandler extends ClientManager.ReconnectHandler {
+        private static AtomicInteger onDisconnectCounter = new AtomicInteger(0) ;
+        private static AtomicInteger onConnectFailureCounter = new AtomicInteger(0) ;
+        private Logger logger = Logger.getLogger(getClass());
         public boolean onDisconnect(CloseReason closeReason) {
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            logger.debug("onDisconnect "+onDisconnectCounter.incrementAndGet());
             return true;
         }
 
         @Override
         public boolean onConnectFailure(Exception exception) {
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            logger.debug("onConnectFailure "+onConnectFailureCounter.incrementAndGet());
             return true;
         }
     }
@@ -76,7 +92,7 @@ public class WebsocketClientGirzlyV2 {
     private final WebsocketClientGirzlyV2 startConnection() {
         logger.info("Connecting to "+connectionURI.toString());
         ClientManager client = ClientManager.createClient();
-        client.getProperties().put(ClientManager.RECONNECT_HANDLER, new SimpleReconnectionHandler());
+        client.getProperties().put(ClientProperties.RECONNECT_HANDLER, new SimpleReconnectionHandler());
 //        client.getProperties().put(GrizzlyClientSocket.WORKER_THREAD_POOL_CONFIG, new SimpleReconnectionHandler());
 //        client.getProperties().put(GrizzlyClientSocket.SELECTOR_THREAD_POOL_CONFIG, new SimpleReconnectionHandler());
         try {

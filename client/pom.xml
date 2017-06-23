@@ -8,7 +8,7 @@
         <artifactId>websockettest</artifactId>
     </parent>
      <properties>
-         <version.tyrus>1.7</version.tyrus>
+         <version.tyrus>1.9</version.tyrus>
      </properties>
     <artifactId>client</artifactId>
     <packaging>jar</packaging>

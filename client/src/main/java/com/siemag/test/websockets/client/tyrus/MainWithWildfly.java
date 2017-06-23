@@ -27,17 +27,17 @@ public class MainWithWildfly {
         int i = 0;
 
         WebsocketClientGirzlyV2 socket1 = new WebsocketClientGirzlyV2(url1);
-        WebsocketClientGirzlyV2 socket2 = new WebsocketClientGirzlyV2(url2);
-        WebsocketClientGirzlyV2 socket3 = new WebsocketClientGirzlyV2(url3);
-        WebsocketClientGirzlyV2 socket4 = new WebsocketClientGirzlyV2(url4);
+//        WebsocketClientGirzlyV2 socket2 = new WebsocketClientGirzlyV2(url2);
+//        WebsocketClientGirzlyV2 socket3 = new WebsocketClientGirzlyV2(url3);
+//        WebsocketClientGirzlyV2 socket4 = new WebsocketClientGirzlyV2(url4);
         while (true) {
             try {
                 String text = String.valueOf(i);
                 logger.info("Sending to sockets "+text);
                 socket1.send(text + " from client1");
-                socket2.send(text + " from client1");
-                socket3.send(text + " from client1");
-                socket4.send(text + " from client1");
+//                socket2.send(text + " from client1");
+//                socket3.send(text + " from client1");
+//                socket4.send(text + " from client1");
             } catch (Exception e) {
                 logger.error("CAN'T SEND", e);
                 // IGNORE
